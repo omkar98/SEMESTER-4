@@ -1,50 +1,46 @@
+/*Sorting elements using Bubble Sort Method.*/
 #include<stdio.h>
 #include<conio.h>
 
-int n=5;
-int a[5]={32,33,34,35,36};
-
-void bubble_sort(int a[], int n)
-{
- int i,j,t,count=1,k;
- for(j=0;j<n-1;j++)
- {
-  for(i=0;i<n-1; i++)
-  {
-   if(a[i]>a[i+1])
-   {
-    t=a[i+1];
-    a[i+1]=a[i];
-    a[i]=t;
-   }
-   printf("Step %d:", count);
-   count++;
-
-
-    for(k=0;k<n;k++)
-     {
-       printf("%d ",a[k]);
-     }
-    printf("\n");
-
-  }
- }
- printf("Final: ");
- for(i=0;i<n;i++)
- {
-  printf("%d ", a[i]);
- }
-
-}
-
-
-
 void main()
 {
-
+ int i,j,temp,k,n=6;
+ int a[6]={10,9,8,7,6,5};
  clrscr();
- bubble_sort(a,n);
- getch();
+
+ /*printf("Enter the number of elements: ");
+ scanf("%d", &n);
+ printf("\nEnter Elements: ");
+ for(i=0;i<n;i++)
+ {
+  scanf("%d", &a[i]);
+ } */
+
+ for(i=0;i<n-1;i++)
+ {
+   printf("After pass %d: \n", i+1);
+   for(j=0;j<n-i-1;j++)
+   {
+     if(a[j]>a[j+1])
+      {
+	temp=a[j];
+	a[j]=a[j+1];
+	a[j+1]=temp;
+      }
+      for(k=0;k<n;k++)
+      {
+	printf("%d ", a[k]);
+      }
+      printf("\n");
+   }
+ }
+
+ printf("\nEnd Result: ");
+ for(i=0;i<n;i++)
+ {
+   printf("%d ", a[i]);
+ }
+getch();
 }
 
 /*OUTPUT
