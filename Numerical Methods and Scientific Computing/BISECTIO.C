@@ -9,7 +9,7 @@ struct node
 };
 struct node *p=NULL;
 
-float func(int i)
+float func(float i)
 {
  struct node *temp2=p;
  float value=0,value1=0;
@@ -24,32 +24,37 @@ float func(int i)
   printf("%f\n",value); */
   temp2=temp2->next;
  }
+ printf("\n|\t f(%0.2f)=%f ",i, value);
+   if(value>0 || value==0)
+     printf(" (+ive) \t|");
+   else if(value<0)
+     printf(" (-ive) \t|");
  return value;
 }
 
 void operation()
 {
 float k,l;
-int i=0;
+float i=0;
 k=func(i);
-   printf("\n|\tf(%d)=%f",i, k);
+l=func(i+0.5);
+   /*printf("\n|\tf(%d)=%f",i, k);
    if(k>0 || k==0)
      printf(" (+ive)\t|");
    else if(k<0)
-     printf(" (-ive)\t|");
-
- do
+     printf(" (-ive)\t|"); */
+ while((k*l)>=0)
   {
-   l=func(i+1);
-   printf("\n|\tf(%d)=%f", i+1,l);
+   i=i+0.5;
+   k=l;
+   l=func(i+0.5);
+  /* printf("\n|\tf(%d)=%f", i+1,l);
    if(l>0 || l==0)
      printf(" (+ive)\t|");
    else if(l<0)
-     printf(" (-ive)\t|");
-   ++i;
+     printf(" (-ive)\t|"); */
   }
-  while((k*l)>=0);
-  printf("\nThe roots lie between ( %d , %d )", i-1,i);
+  printf("\nThe roots lie between ( %f , %f )", i,i+0.5);
 }
 
 
@@ -89,6 +94,8 @@ void main()
   initialize();
   printf("Initializated the polynomial successfully!");
   operation();
+  printf("\nRoots found successfully!");
+  roots();
   getch();
 
 }
