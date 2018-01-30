@@ -1,6 +1,9 @@
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
+
+float func(float);
+
 struct node
 {
  int coeff;
@@ -8,6 +11,26 @@ struct node
  struct node *next;
 };
 struct node *p=NULL;
+
+
+
+int verify_roots(float r1, float r2)
+{
+ float k,l;
+ k=func(r1);
+ l=func(r2);
+ if((k*l)>=0)
+ {
+   printf("\nThe actual root of the polynomial do not lie between (%f, %f).", r1,r2);
+   return 0;
+ }
+ else if((k*l)<0)
+ {
+   printf("\n The entered values have been tested. \nThe actual root lie between (%f, %f)",r1,r2);
+   return 1;
+ }
+}
+
 
 float func(float i)
 {
@@ -38,21 +61,12 @@ float k,l;
 float i=0;
 k=func(i);
 l=func(i+0.5);
-   /*printf("\n|\tf(%d)=%f",i, k);
-   if(k>0 || k==0)
-     printf(" (+ive)\t|");
-   else if(k<0)
-     printf(" (-ive)\t|"); */
+
  while((k*l)>=0)
   {
    i=i+0.5;
    k=l;
    l=func(i+0.5);
-  /* printf("\n|\tf(%d)=%f", i+1,l);
-   if(l>0 || l==0)
-     printf(" (+ive)\t|");
-   else if(l<0)
-     printf(" (-ive)\t|"); */
   }
   printf("\nThe roots lie between ( %f , %f )", i,i+0.5);
 }
@@ -90,12 +104,36 @@ void initialize()
 
 void main()
 {
+  int ch,k;
+  float r1,r2;
   clrscr();
   initialize();
   printf("Initializated the polynomial successfully!");
-  operation();
-  printf("\nRoots found successfully!");
-  roots();
+  start:
+  printf("\n======MENU====\n");
+  printf("1) Enter the limits of the roots of given polynomial\n");
+  printf("2) Let the program calculate the limits of the roots.\n");
+  scanf("%d",&ch);
+  switch(ch)
+  {
+    case 1:
+       printff("\nEnter the Roots: ");
+       scanf("%f %f", &r1, &r2);
+       k=verify_roots(r1,r2);
+       if(k==1)
+	  find_root(r1,r2);
+       else if (k==0)
+	  goto start:
+       break;
+    case 2:
+       operation();
+       //roots();
+       break;
+    default:
+	printf("Please Enter a valid choice.\n");
+	goto start;
+	break;
+  }
   getch();
 
 }
