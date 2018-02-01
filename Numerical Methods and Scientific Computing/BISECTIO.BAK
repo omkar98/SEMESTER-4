@@ -10,7 +10,7 @@ struct node
  int coeff;
  int expo;
  struct node *next;
-};
+ };
 struct node *p=NULL;
 
 float find_root(float r1,float r2, float ae, int n)
@@ -29,38 +29,46 @@ float find_root(float r1,float r2, float ae, int n)
   ae=0.01;
   printf("\nBy default, 0.01 is set as allowed error.");
  }
+ printf("\n|   #No\t|   r1 \t|   r2 \t|   x \t|f(x)\t\t\t|  aer \t|   ae \t|\n");
+ printf("|=======|=======|=======|=======|=======================|=======|=======|\n");
  do
  {
-  printf("\nITERATION NO: %2d", ++count);
+  printf("|%2d\t|", ++count);
+  printf("%0.5f|%0.5f|", r1,r2);
   avg_prev=avg;
   avg=(r1+r2)/2;
+  printf("%0.5f|",avg);
   k=func(avg);
+  printf(" %0.6f", k);
+
   if(k>0)
    {
     // find_root(avg,r2);
+      printf("\t(+ive)  |");
       r2=avg;
    }
    else if(k<0)
    {
      // find_root(r1,avg);
+     printf("\t(-ive)  |");
      r1=avg;
    }
-   printf("\nThe root now lies between (%f,%f)", r1,r2);
+   //printf("\nThe root now lies between (%f,%f)", r1,r2);
    --n;
    if(n==0)
    {
     n=1;
    }
    aer=fabs(avg-avg_prev);
-   printf("\nCurrent Error(aer): %f - %f = %f", avg, avg_prev, aer);
-   if(aer>ae)
+   printf("%0.5f|%0.5f|\n", aer,ae);
+   /* if(aer>ae)
    {
     printf("\n%f(Current Error) > %f(Allowed Error)\n", aer, ae);
    }
    else if(aer<ae)
    {
     printf("\n%f(Current Error) < %f(Allowed Error)\n", aer, ae);
-   }
+   } */
  }
  while(n!=1 || aer>ae);
  /*This while statement will keep
@@ -136,11 +144,11 @@ float func(float i)
   printf("%f\n",value); */
   temp2=temp2->next;
  }
- printf("\n|\t f(%f)=%f ",i, value);
+/* printf("|f(%f)=%f ",i, value);
    if(value>0 || value==0)
-     printf(" (+ive) \t|");
+     printf(" (+ive) \t|\n");
    else if(value<0)
-     printf(" (-ive) \t|");
+     printf(" (-ive) \t|\n"); */
  return value;
 }
 
@@ -149,13 +157,30 @@ float operation()
 float k,l;
 float i=0;
 k=func(i);
+  printf("|f(%f)=%f ",i, k);
+   if(k>0 || k==0)
+     printf(" (+ive) \t|\n");
+   else if(k<0)
+     printf(" (-ive) \t|\n");
 l=func(i+0.5);
+   printf("|f(%f)=%f ",i, l);
+   if(l>0 || l==0)
+     printf(" (+ive) \t|\n");
+   else if(l<0)
+     printf(" (-ive) \t|\n");
+
 
  while((k*l)>=0)
   {
    i=i+0.5;
    k=l;
    l=func(i+0.5);
+   printf("|f(%f)=%f ",i, l);
+   if(l>0 || l==0)
+     printf(" (+ive) \t|\n");
+   else if(l<0)
+     printf(" (-ive) \t|\n");
+
   }
   printf("\nThe roots lie between ( %f , %f )", i,i+0.5);
  return i;
