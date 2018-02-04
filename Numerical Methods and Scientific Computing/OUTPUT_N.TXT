@@ -1,0 +1,25 @@
+Enter the expression: 2x^3-10x^2-1x^0+0x^0                                      
+Initializated the polynomial successfully!                                      
+======MENU====                                                                  
+1) Enter the limits of the roots of given polynomial                            
+2) Let the program calculate the limits of the roots.                           
+Your choice: 2                                                                  
+pow: DOMAIN error                                                               
+|f(0.000000)=-1.000000  (-ive)  |                                               
+|f(0.500000)=-3.250000  (-ive)  |                                               
+|f(1.000000)=-9.000000  (-ive)  |                                               
+|f(1.500000)=-16.750000  (-ive)         |                                       
+|f(2.000000)=-25.000000  (-ive)         |                                       
+|f(2.500000)=-32.250000  (-ive)         |                                       
+|f(3.000000)=-37.000000  (-ive)         |                                       
+|f(3.500000)=-37.750000  (-ive)         |                                       
+|f(4.000000)=-33.000000  (-ive)         |                                       
+|f(4.500000)=-21.250000  (-ive)         |                                       
+|f(5.000000)=-1.000000  (-ive)  |                                               
+|f(5.500000)=29.250000  (+ive)  |                                               
+                                                                                
+The roots lie between ( 5.000000 , 5.500000 )                                   
+Enter the allowed error and number of iterations: 0.0001 0                      
+                                                                                
+                                                                                
+                                                                                

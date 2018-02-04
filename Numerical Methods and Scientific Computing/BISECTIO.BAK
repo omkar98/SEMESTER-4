@@ -102,14 +102,14 @@ float find_root(float r1,float r2, float ae, int n)
    }
    //printf("\nThe root now lies between (%f,%f)", r1,r2);
    --n;
-   if(n==0)
+   if(n==-1)
    {
-    n=1;
+    n=0;
    }
    aer=fabs(avg-avg_prev);
    printf("%0.5f|%0.5f|\n", aer,ae);
  }
- while(n!=1 || aer>ae);
+ while(n!=0 || aer>ae);
  /*This while statement will keep
    iterating unless no. of iterations
    and allowed error both are satisfied*/
@@ -121,7 +121,9 @@ int verify_roots(float r1, float r2)
 {
  float k,l;
  k=func(r1);
+ printf("|\tf(%f)=%f\t|\n ",r1, k);
  l=func(r2);
+ printf("|\tf(%f)=%f\t|\n ",r2, l);
  if((k*l)>=0)
  {
    printf("\nThe actual root of the polynomial do not lie between (%f, %f).", r1,r2);
