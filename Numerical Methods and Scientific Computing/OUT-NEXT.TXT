@@ -15,9 +15,6 @@ Your choice: 2
 |f(-1.000000)=6.000000  (+ive)  |                                               
                                                                                 
 The roots lie between ( -1.500000 , -1.000000 )                                 
-Enter the allowed error and number of iterations:                               
-   
-The roots lie between ( -1.500000 , -1.000000 )                                 
 Enter the allowed error and number of iterations: 0.00001 0                     
                                                                                 
 By default, 3 iterations will be executed.                                      
@@ -40,8 +37,7 @@ By default, 3 iterations will be executed.
 | 15    |-1.39624|-1.39621|-1.39622| -0.000212  (-ive)  |0.00002|0.00001|       
 | 16    |-1.39622|-1.39621|-1.39622| -0.000051  (-ive)  |0.00001|0.00001|       
                                                                                 
-After completing 16 iterations,                                                 
- the root is: -1.396217                                                         
+After completing 16 iterations, the root is: -1.396217                                                         
                                                                              
                                                                                 
                                                                                 
