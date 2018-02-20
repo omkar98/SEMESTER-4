@@ -1,0 +1,49 @@
+075C:0000 B85B07         MOV       AX,075B  
+075C:0003 8ED8           MOV       DS,AX  
+075C:0005 33C0           XOR       AX,AX  
+075C:0007 B90400         MOV       CX,0004  
+075C:000A BE0000         MOV       SI,0000  
+075C:000D 8B04           MOV       AX,WORD PTR [SI]  
+075C:000F 46             INC       SI  
+075C:0010 46             INC       SI  
+075C:0011 0304           ADD       AX,WORD PTR [SI]  
+075C:0013 83D300         ADC       BX,00  
+075C:0016 E2F7           LOOP      000F  
+075C:0018 BF0A00         MOV       DI,000A  
+075C:001B 8905           MOV       WORD PTR [DI],AX  
+075C:001D 83C702         ADD       DI,02  
+075C:0020 891D           MOV       WORD PTR [DI],BX  
+075C:0022 B44C           MOV       AH,4C  
+075C:0024 CD21           INT       21  
+075C:0026 5B             POP       BX  
+075C:0027 C3             RET         
+075B:0000  12 20 22 25 56 BB 9C F4 58 55 7E 4A 02   "%V»œôXU~J
+075B:000D  00 00 00 B8 5B 07 8E D8 33 C0 B9 04 00  ...¸[ŽØ3À¹.
+075B:001A  BE 00 00 8B 04 46 46 03 04 83 D3 00 E2  ¾..‹FFƒÓ.â
+075B:0027  F7 BF 0A 00 89 05 83 C7 02 89 1D B4 4C  ÷¿
+.‰ƒÇ‰´L
+075B:0034  CD 21 5B C3 80 3E E5 27 00 74 01 C3 53  Í![Ã€>å'.tÃS
+075B:0041  56 06 BE 20 02 A1 D0 01 40 89 04 A1 CA  V¾ ¡Ð@‰¡Ê
+075B:004E  01 89 44 08 A1 14 02 89 44 0A 33 C0 89  ‰D¡‰D
+3À‰
+075B:005B  44 02 89 44 04 89 44 06 89 44 0C 89 44  D‰D‰D‰D‰D
+ AX = 4C7E
+ BX = 0002
+ CX = 0000
+ DX = 0000
+ SP = 0000
+ BP = 0000
+ SI = 0008
+ DI = 000C
+ DS = 075B
+ ES = 074B
+ SS = 075A
+ CS = 075C
+ IP = 0026
+ FL = 0206
+
+NV UP EI PL
+NZ NA PE NC
+
+
+
