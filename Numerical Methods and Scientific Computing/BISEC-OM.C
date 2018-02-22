@@ -42,7 +42,7 @@ void main()
 	printf("\nEnter the allowed error and number of iterations: ");
 	scanf("%f %d",&ae, &iter);
 	root=find_root(r1,r1+0.5,ae,iter);
-	printf("\n the root is: %f",root);
+	printf("the root is: %f",root);
 	break;
     default:
 	printf("Please Enter a valid choice.\n");

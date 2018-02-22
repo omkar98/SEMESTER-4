@@ -42,7 +42,7 @@ void main()
 	printf("\nEnter the allowed error and number of iterations: ");
 	scanf("%f %d",&ae, &iter);
 	root=find_root(r1,r1+0.5,ae,iter);
-	printf("\n the root is: %f",root);
+	printf(" the root is: %f",root);
 	break;
     default:
 	printf("Please Enter a valid choice.\n");
@@ -131,7 +131,7 @@ int verify_roots(float r1, float r2)
 float func(float x)
 {
  float value=0;
- value=2*x*x*x-10*x*x-1;
+ value=x*log10(x)-1.2;
  //value=x*log10(x)-1.2;
  //value=sin(x)-(1/x);
  //value=cos(x)-x*exp(x);
