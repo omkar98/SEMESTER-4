@@ -1,0 +1,137 @@
+#include<stdio.h>
+#include<conio.h>
+#define SIZE 20
+
+float mat[3][4]={ 1, 4, -1, -5, 1, 1, -6, -12, 3, -1, -1, 4 };;
+//float mat[3][4];
+int rows, colms;
+float x[10];
+
+void print_mat();
+
+void initialize_mat()
+{
+ int i,j;
+ for(i=0;i<rows;i++)
+ {
+  for(j=0;j<colms;j++)
+  {
+    mat[i][j]=0;
+  }
+ }
+ printf("\nInitialized the matrix to 0:\n\n ");
+ print_mat();
+}
+
+void enter_values()
+{
+  int i,j,*k;
+  printf("Enter the values in the matrix: ");
+  for(i=0;i<rows;i++)
+  {
+   for(j=0;j<colms;j++)
+   {
+    scanf("%f",&mat[i][j]);
+   }
+  }
+}
+
+void print_mat()
+{
+ int i,j,k,l=88,count=1;
+ for(i=0;i<rows;i++)
+ {
+   for(j=0;j<colms;j++)
+   {
+     k=((count)%(colms));
+     if(k==1)
+      {
+	printf("|");
+      }
+     printf("\t%3.3f\t",mat[i][j]);
+
+    if(k==0 || k==colms-1)
+     {
+      printf(" | ");
+     }
+     if(k==rows)
+     {
+	printf(" [ %c ] = | ", l);
+	l++;
+     }
+     count++;
+   }
+   printf("\n");
+ }
+}
+
+void operation(int unknown)
+{
+  int i,j,k;
+  float p;
+  for(k=0;k<unknown-1;k++)
+  {
+    for(i=k+1;i<rows;i++)
+    {
+     printf("\nOperation: R%d - (%.3f/%.3f)R%d", i+1,mat[i][k],mat[k][k],k+1);
+     p=(mat[i][k]/mat[k][k]);
+     for(j=k;j<colms;j++)
+     {
+      mat[i][j]=mat[i][j]-p*mat[k][j];
+     }
+     printf("\n");
+     print_mat();
+    }
+  }
+}
+
+void back_substitution()
+{
+  float sub=mat[rows-1][colms-1];
+  int i,j,count=0,k;
+  for(i=rows-1;i>=0;i--)
+  {
+   k=0;
+   for(j=rows-1;j>=i;j--)
+   {
+    if(j==i)
+     {
+      if(count!=0)
+      {
+	sub=mat[i][colms-1]-sub;
+      }
+      x[count]=(sub/mat[i][j]);
+      //printf("\nSub: %.3f/%.3f", sub, mat[i][j]);
+      //printf("\n%.3f", x[count]);
+      count++;
+      sub=0.0;
+     }
+     else
+     {
+      sub= sub + (mat[i][j]*x[k]);
+      k++;
+     }
+   }
+  }
+  for(i=count-1;i>=0;i--)
+  {
+     printf("\n%c = %.3f",(88+i),x[i]);
+  }
+}
+
+void main()
+{
+ int unknown;
+ clrscr();
+ printf("\nEnter no. of unknowns: ");
+ scanf("%d", &unknown);
+ rows=unknown;
+ colms=unknown+1;
+ print_mat();
+ //initialize_mat();
+ //enter_values();
+// print_mat();
+ operation(unknown);
+ back_substitution();
+ getch();
+}
