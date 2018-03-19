@@ -12,7 +12,7 @@ static void force_fpf()
 struct array
 {
  int no;
- float *arr;
+ float *arr,*tarr;
  struct array *next;
 };
 struct array *start=NULL;
@@ -20,16 +20,18 @@ int count_get_data=0;
 
 void get_data(int);
 void differ_values(int);
-
+void print_array(struct array*);
 
 void get_data(int terms)
 {
   int i;
   struct array *temp1=start;
   struct array *temp=(struct array*)malloc(sizeof(struct array));
+  temp->arr=(float*)malloc(sizeof(float)*terms);
+  temp->tarr=(float*)malloc(sizeof(float)*(terms-1));
   temp->no=count_get_data;
   /*If only one node exists*/
-  //printf("\nStart: %d | Temp: %d", start, temp);
+ // printf("\nStart: %d | Temp: %d", start, temp);
   if(count_get_data==0)
   {
    start=temp;
@@ -41,7 +43,7 @@ void get_data(int terms)
     {
      temp1=temp1->next;
     }
-    //printf(" | Temp1 = %d", temp1);
+   // printf(" | Temp1 = %d", temp1);
     temp1->next=temp;
     //printf(" | Temp1->next = %d\n", temp1->next);
   }
@@ -62,16 +64,33 @@ void get_data(int terms)
   }
   else
   {
-    differ_values(terms);
+    //differ_values(terms);
+  }
+
+  if(count_get_data!=0)
+  {
+    for(i=1;i<terms;i++)
+    {
+      temp->tarr[i-1]=temp->arr[i]-temp->arr[i-1];
+    }
+    for(i=1;i<terms;i++)
+    {
+      printf("\ntarr[%d]=%f",i-1,temp->tarr[i-1]);
+    }
   }
 
   ++count_get_data;
+  print_array(temp);
 }
 
-differ_values(int terms)
+/*differ_values(int terms)
 {
 
 
+} */
+void print_array(struct array *temp)
+{
+ printf("\nArray Number: %d", temp->no);
 }
 
 void main()
