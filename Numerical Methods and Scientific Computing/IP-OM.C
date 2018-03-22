@@ -61,12 +61,7 @@ void get_data(int terms)
     {
       scanf("%f", &temp->arr[i]);
     }
-    for(i=0;i<terms;i++)
-    {
-      printf("\n%d = %.3f",&temp->arr[i], temp->arr[i]);
-    }
   }
- printf("\nArray Number: %d", (temp->no)+1);
 }
 
 
@@ -76,7 +71,6 @@ void differ_values(int terms)
   struct array *temp=create_array(terms);
   struct array *temp1=start;
 
-  printf("\nArray Number: %d", (temp->no)+1);
   while(temp1->next!=NULL)
   {
     temp1=temp1->next;
@@ -86,10 +80,6 @@ void differ_values(int terms)
   {
     temp->arr[i-1]=(temp1->arr[i])-(temp1->arr[i-1]);
   }
-  for(i=0;i<terms;i++)
-  {
-    printf("\n%.3f", temp->arr[i]);
-  }
 }
 
 void print_array(int terms)
@@ -98,6 +88,14 @@ void print_array(int terms)
  float test;
  k=(terms*2)-2;
  printf("\n");
+ printf(" x\t| y\t|");
+
+ for(i=1;i<terms;i++)
+ {
+   printf(" $%dy\t|", i);
+ }
+ printf("\n");
+
  for(i=0;i<k;i++)
  {
   counter=i;
@@ -110,6 +108,7 @@ void print_array(int terms)
   {
     //printf("x\ty");
     get_value(0,x);
+    printf("\t");
     get_value(1,x);
     x++;
     for(j=0;j<counter;j++)
@@ -134,8 +133,8 @@ void print_array(int terms)
   {
     if(j%2==0)
     {
-      get_value(j+2,0);
       printf("\t");
+      get_value(j+2,0);
     }
     if(j%2==1)
     {
@@ -148,33 +147,59 @@ void print_array(int terms)
  if(i==k)
  {
     get_value(0,x);
+    printf("\t");
     get_value(1,x);
  }
 }
 
 void get_value(int num,int ar)
 {
- /* Num is the 'temp->no' that is required.
-    ar is the index of array that is required.
- */
  struct array *temp=start;
  while(temp->no!=num)
  {
    temp=temp->next;
  }
  if(num<2)
-   printf("%.3f\t", temp->arr[ar]);
+   printf(" %.3f", temp->arr[ar]);
  if(num>=2)
  {
-   printf("%.3f", temp->arr[temp->top]);
+   printf(" %.3f", temp->arr[temp->top]);
    (temp->top)++;
  }
 }
 
+find_value(int unknown)
+{
+ struct array *temp=start;
+ float p;
+ int i,j;
+ for(i=0;i<5/2;i++)
+ {
+  if (fabs((temp->arr[i])-unknown)  <  fabs ((temp->arr[i+1])-unknown))
+     {
+       p = (((temp->arr[i])-(temp->arr[i+1]))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
+       j=i;
+     }
+   if (fabs((temp->arr[i])-unknown)  ==  fabs ((temp->arr[i+1])-unknown))
+     {
+       p = (((temp->arr[i])-(temp->arr[i+1]))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
+       j=i;
+     }
+   if (fabs((temp->arr[i])-unknown)  >  fabs ((temp->arr[i+1])-unknown))
+     {
+       p = (((temp->arr[i])-(temp->arr[i+1]))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
+       j=i;
+     }
 
+ }
+ printf("\nWe select %f as x0",temp->arr[j]);
+ printf("\n\tp = %f", p);
+}
+ 
 void main()
 {
  int terms,i;
+ float unknown;
  clrscr();
  printf("\nEnter number of terms: ");
  scanf("%d", &terms);
@@ -182,10 +207,14 @@ void main()
  get_data(terms);
  printf("\nEnter the terms of y: ");
  get_data(terms);
+ printf("\nEnter the value of x for which you want the value of y: ");
+ scanf("%f", &unknown);
  for(i=1;i<terms;i++)
  {
    differ_values(terms-i);
  }
+ printf("\nDifference Table : ");
  print_array(terms);
+ find_value(unknown);
  getch();
 }
