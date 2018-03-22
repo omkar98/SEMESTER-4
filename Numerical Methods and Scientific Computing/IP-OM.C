@@ -1,4 +1,3 @@
-/*The problem is only with the count_get_data variable. Fix it appropriately.*/
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -17,32 +16,20 @@ struct array
  struct array *next;
 };
 struct array *start=NULL;
-int count_get_data=0;
-
+int count=0;
 
 void get_data(int);
 void differ_values(int);
-void print_array(struct array*);
-
-
-
+void print_array(int);
 
 struct array* create_array(int terms)
 {
  struct array *temp=(struct array*)malloc(sizeof(struct array));
- if(count_get_data<2)
- {
-   temp->no=count_get_data;
+   temp->no=count;
    temp->arr=(float*)malloc(sizeof(float)*terms);
    temp->next=NULL;
- }
- else
- {
-   temp->no=count_get_data;
-   temp->arr=(float*)malloc(sizeof(float)*terms-count_get_data+1);
-   temp->next=NULL;
- }
-   return temp;
+   count++;
+ return temp;
 }
 
 void get_data(int terms)
@@ -51,7 +38,7 @@ void get_data(int terms)
  struct array *temp1=start;
  struct array *temp=create_array(terms);
  /*If only one node exists:*/
- if(count_get_data==0)
+ if(temp->no==0)
   {
    start=temp;
   }
@@ -62,33 +49,22 @@ void get_data(int terms)
     {
      temp1=temp1->next;
     }
-   // printf(" | Temp1 = %d", temp1);
     temp1->next=temp;
-    //printf(" | Temp1->next = %d\n", temp1->next);
   }
-  if(count_get_data==0 || count_get_data==1)
+
+  if((temp->no)<2)
   {
-    for(i=0; i<terms;i++)
+    for(i=0;i<terms;i++)
     {
       scanf("%f", &temp->arr[i]);
     }
-    for(i=0; i<terms;i++)
+    for(i=0;i<terms;i++)
     {
       printf("\n%d = %.3f",&temp->arr[i], temp->arr[i]);
     }
   }
+ printf("\nArray Number: %d", (temp->no)+1);
 
-  count_get_data++;
-  print_array(temp);
-
-  for(i=0;i<terms-1;i++)
-  {
-    if(temp->no>0)
-    {
-      differ_values(terms);
-    }
-  }
-  //  count_get_data++;
 }
 
 
@@ -98,33 +74,78 @@ void differ_values(int terms)
   struct array *temp=create_array(terms);
   struct array *temp1=start;
 
+  printf("\nArray Number: %d", (temp->no)+1);
   while(temp1->next!=NULL)
-    {
-     temp1=temp1->next;
-    }
-   // printf(" | Temp1 = %d", temp1);
-    temp1->next=temp;
-
-  for(i=0;i<terms-((temp1->no)-1);i++)
   {
-   temp->arr[i]=(temp1->arr[i+1])-(temp1->arr[i]);
+    temp1=temp1->next;
   }
-
-  for(i=0;i<(terms-temp1->no);i++)
+  temp1->next=temp;
+  for(i=1;i<=terms;i++)
   {
-   printf("\n%.3f", temp->arr[i]);
+    temp->arr[i-1]=(temp1->arr[i])-(temp1->arr[i-1]);
   }
-  print_array(temp);
+  for(i=0;i<terms;i++)
+  {
+    printf("\n%.3f", temp->arr[i]);
+  }
 }
 
-void print_array(struct array *temp)
+void print_array(int terms)
 {
- printf("\nArray Number: %d", temp->no);
+ int i,j,k,temp,counter;
+ k=(terms*2)-2;
+ printf("\n");
+ for(i=0;i<k;i++)
+ {
+  counter=i;
+  if(counter>k/2)
+  {
+    temp=counter%(k/2);
+    counter=(k/2)-temp;
+  }
+  if(counter%2==0)
+  {
+    printf("x\ty");
+    for(j=0;j<counter;j++)
+    {
+      if(j%2==0)
+      {
+	printf("\t");
+      }
+      if(j%2==1)
+      {
+	printf("\t^y");
+      }
+    }
+    printf("\n");
+  }
+
+  if(counter%2==1)
+  {
+   printf("\t");
+  for(j=0;j<counter;j++)
+  {
+    if(j%2==0)
+    {
+      printf("\t^y");
+    }
+    if(j%2==1)
+    {
+      printf("\t");
+    }
+  }
+  printf("\n");
+ }
+ }
+ if(i==k)
+ {
+    printf("x\ty");
+ }
 }
 
 void main()
 {
- int terms;
+ int terms,i;
  clrscr();
  printf("\nEnter number of terms: ");
  scanf("%d", &terms);
@@ -132,5 +153,10 @@ void main()
  get_data(terms);
  printf("\nEnter the terms of y: ");
  get_data(terms);
+ for(i=1;i<terms;i++)
+ {
+   differ_values(terms-i);
+ }
+ print_array(terms);
  getch();
 }
