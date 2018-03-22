@@ -14,6 +14,7 @@ struct array
  int no;
  float *arr;
  struct array *next;
+ int top;
 };
 struct array *start=NULL;
 int count=0;
@@ -21,6 +22,7 @@ int count=0;
 void get_data(int);
 void differ_values(int);
 void print_array(int);
+void get_value(int,int);
 
 struct array* create_array(int terms)
 {
@@ -28,6 +30,7 @@ struct array* create_array(int terms)
    temp->no=count;
    temp->arr=(float*)malloc(sizeof(float)*terms);
    temp->next=NULL;
+   temp->top=0;
    count++;
  return temp;
 }
@@ -64,7 +67,6 @@ void get_data(int terms)
     }
   }
  printf("\nArray Number: %d", (temp->no)+1);
-
 }
 
 
@@ -92,7 +94,8 @@ void differ_values(int terms)
 
 void print_array(int terms)
 {
- int i,j,k,temp,counter;
+ int i,j,k,temp,counter,x=0;
+ float test;
  k=(terms*2)-2;
  printf("\n");
  for(i=0;i<k;i++)
@@ -105,7 +108,10 @@ void print_array(int terms)
   }
   if(counter%2==0)
   {
-    printf("x\ty");
+    //printf("x\ty");
+    get_value(0,x);
+    get_value(1,x);
+    x++;
     for(j=0;j<counter;j++)
     {
       if(j%2==0)
@@ -114,7 +120,8 @@ void print_array(int terms)
       }
       if(j%2==1)
       {
-	printf("\t^y");
+	printf("\t");
+	get_value(j+2,0);
       }
     }
     printf("\n");
@@ -127,7 +134,8 @@ void print_array(int terms)
   {
     if(j%2==0)
     {
-      printf("\t^y");
+      get_value(j+2,0);
+      printf("\t");
     }
     if(j%2==1)
     {
@@ -139,9 +147,30 @@ void print_array(int terms)
  }
  if(i==k)
  {
-    printf("x\ty");
+    get_value(0,x);
+    get_value(1,x);
  }
 }
+
+void get_value(int num,int ar)
+{
+ /* Num is the 'temp->no' that is required.
+    ar is the index of array that is required.
+ */
+ struct array *temp=start;
+ while(temp->no!=num)
+ {
+   temp=temp->next;
+ }
+ if(num<2)
+   printf("%.3f\t", temp->arr[ar]);
+ if(num>=2)
+ {
+   printf("%.3f", temp->arr[temp->top]);
+   (temp->top)++;
+ }
+}
+
 
 void main()
 {
