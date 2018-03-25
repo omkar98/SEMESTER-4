@@ -172,30 +172,14 @@ find_value(int unknown)
 {
  struct array *temp=start;
  float p;
- int i,j;
- for(i=0;i<5/2;i++)
- {
-  if (fabs((temp->arr[i])-unknown)  <  fabs ((temp->arr[i+1])-unknown))
-     {
-       p = (((temp->arr[i])-(temp->arr[i+1]))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
-       j=i;
-     }
-   if (fabs((temp->arr[i])-unknown)  ==  fabs ((temp->arr[i+1])-unknown))
-     {
-       p = (((temp->arr[i])-(temp->arr[i+1]))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
-       j=i;
-     }
-   if (fabs((temp->arr[i])-unknown)  >  fabs ((temp->arr[i+1])-unknown))
-     {
-       p = (((temp->arr[i])-(temp->arr[i+1]))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
-       j=i;
-     }
-
- }
- printf("\nWe select %f as x0",temp->arr[j]);
+ int i;
+ printf("\nWe select %.3f as x0",temp->arr[i]);
+ p = (((temp->arr[i])-(unknown))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
+ temp=temp->next;
+ printf(" and %.3f as y0", temp->arr[i]);
  printf("\n\tp = %f", p);
 }
- 
+
 void main()
 {
  int terms,i;
