@@ -1,92 +1,109 @@
 #include<stdio.h>
 #include<conio.h>
+#include<string.h>
+char first[20],second[20],lcs[20][20];
+int c,d,i,j,temp[20][20],m,n;
 
-int temp[30][30]; // to store 1's and 0's
-char first_seq[30];
-char second_seq[30];
-char lcs[30][30];//to store 'u','h','d';
-int s1,s2;
+//LCS FUNCTION
+void lcs_algo(char first[],char second[])
+{
+c=strlen(first);
+d=strlen(second);
+for(i=0;i<=c;i++) //TO MAKE FIRST COLUMN OF TEMP[I][J] 0
+{
+temp[i][0]=0;
+}
+for(j=0;j<=d;j++)   //TO MAKE FIRST ROW OF TEMP[I][J] 0
+{
+temp[0][j]=0;
+}
+for(i=1;i<=c;i++)
+{
+ for(j=1;j<=d;j++)
+ {
+  if(first[i-1]==second[j-1])
+  {
+   temp[i][j]=temp[i-1][j-1]+1;
+   lcs[i][j]='D';
+  }
+  else if(temp[i-1][j]>=temp[i][j-1])
+  {
+   temp[i][j]=temp[i-1][j];
+   lcs[i][j]='U';
+  }
+  else
+  {
+   temp[i][j]=temp[i][j-1];
+   lcs[i][j]='L';
+  }
+ }
+}
+for(i=0;i<=c;i++)   //PRINTS ELEMENTS OF TEMP[][]
+{
+ printf("\n\t");
+ for(j=0;j<=d;j++)
+ {
+ printf("  %d[%c]",temp[i][j],lcs[i][j]);
+ }
+ printf("\n");
+}
+}
 
-void lcs_function();
-void print_lcs();
+//FUNCTION TO PRINT LCS
+void print_lcs(int i,int j)
+{
+if(i==0 || j==0)
+{
+return;
+}
+else if(lcs[i][j]=='D')
+{
+print_lcs(i-1,j-1);
+printf("%c",first[i-1]);
+}
+else if(lcs[i][j]=='U')
+{
+print_lcs(i-1,j);
+}
+else
+{
+print_lcs(i,j-1);
+}
+}
 
+//MAIN FUNCTION
 void main()
 {
-  int n1,n2;
-  clrscr();
-  printf("\nThe first string:");
-  scanf("%s", &first_seq);
-  printf("\nThe second string: ");
-  scanf("%s", &second_seq);
-  s1=strlen(first_seq);
-  s2=strlen(second_seq);
-  lcs_function();
-  getch();
+clrscr();
+printf("\tEnter the first string");
+scanf("%s",&first);
+printf("\tEnter the second string");
+scanf("%s",&second);
+lcs_algo(first,second);
+printf("\n\tLONGEST COMMON SUBSEQUENCE IS:");
+print_lcs(c,d);
+getch();
 }
 
-void lcs_function()
-{
- int i,j;
- for(i=0;i<s1+1;i++)
- {
-  for(j=0;j<s2+1;j++)
-  {
-    temp[i][j]=0;
-    lcs[i][j]='0';
-  }
- }
- for(i=0;i<s1+1;i++)
- {
-  for(j=0;j<s2+1;j++)
-  {
-    //printf(" %d ", temp[i][j]);
-    if(first_seq[i]==second_seq[j])
-    {
-     temp[i+1][j+1]=temp[i][j]+1;
-     lcs[i+1][j+1]='d';
-    }
-    else if(first_seq[i]!=second_seq[j])
-    {
-      if (temp[i+1][j]>temp[i][j+1])
-      {
-	lcs[i+1][j+1]='<';
-	temp[i+1][j+1]=temp[i+1][j];
-      }
-      if(temp[i+1][j]<=temp[i][j+1])
-      {
-	lcs[i+1][j+1]='^';
-	temp[i+1][j+1]=temp[i][j+1];
-      }
-    }
-  }
- }
- print_lcs();
-}
 
-void print_lcs()
-{
- int i,j,k;
- for(i=0;i<s1+1;i++)
- {
-  //printf(" %c ", first_seq[i]);
-  for(j=0;j<s2+1;j++)
-  {
-    //if(i=0)
-      //printf(" %c ", second_seq[j]);
-    printf(" %d ", temp[i][j]);
-  }
-  printf("\n");
- }
+********************OUTPUT************************
 
- printf("\n");
+ 
 
-  for(i=0;i<s1+1;i++)
-  {
-   for(j=0;j<s2+1;j++)
-   {
-    printf(" %c ", lcs[i][j]);
-   }
-   printf("\n");
-  }
 
-}
+
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+
+
+
+
+                                                                                
+
+
+
