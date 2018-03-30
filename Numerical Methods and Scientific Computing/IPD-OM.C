@@ -1,4 +1,4 @@
-/*Refer to page 189 for testing this program.*/
+/*Refer to page 239 for testing this program.*/
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -168,48 +168,35 @@ void get_value(int num,int ar)
 void find_value(int unknown)
 {
  struct array *temp=start;
- float p;
+ float h;
  int i=0;
  printf("\nWe select %.3f as x0",temp->arr[i]);
- p = (fabs((temp->arr[i])-(unknown))  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
+ h = ((1)  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
  temp=temp->next;
  printf(" and %.3f as y0", temp->arr[i]);
- printf("\n\tp = %f", p);
- interpolation(p);
+ printf("\n\tp = %f", h);
+ interpolation(h);
 }
 
-void interpolation(float p)
+void interpolation(float h)
 {
   struct array *temp=start;
-  int count=0;
-  float sum=0;
+  int count=1;
+  float sum=0.0;
+  temp=temp->next;
   while(temp->next!=NULL)
   {
+   printf("\nCount = ");
    temp=temp->next;
-   sum=sum+(k(p,count)*temp->arr[0]);
+   printf("t\ntemp->arr[0]: %f", temp->arr[0]);
+   if(count%2==0)
+     sum= (sum - ((1/count)*(temp->arr[0])));
+   else
+     sum=sum + ((1/count)*(temp->arr[0])));
+   printf("\nSum=%f", sum);
    count++;
   }
-  printf("\nSolution: %f", sum);
-}
-
-float k(float p, int count)
-{
- float temp1=1, temp=1, fact=1;
- int i;
- if(count==0)
- {
-  return (temp1);
- }
- else
- {
-  for(i=0;i<count;i++)
-  {
-   temp=temp*(p-i);
-   fact=fact*(i+1);
-  }
-  temp1=temp/fact;
-  return(temp1);
- }
+  printf("\nSolution: %f", (h)*sum);
 }
 
 void main()
