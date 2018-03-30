@@ -3,13 +3,6 @@
 #include<conio.h>
 #include<math.h>
 
-static void force_fpf()
-{
- float x, *y;
- y=&x;
- x=*y;
-}
-
 struct array
 {
  int no;
