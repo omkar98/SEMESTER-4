@@ -25,6 +25,7 @@ void differ_values(int);
 void print_array(int);
 void get_value(int,int);
 void interpolation(float p);
+float k(float p, int count);
 
 
 struct array* create_array(int terms)
