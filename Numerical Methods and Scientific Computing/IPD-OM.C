@@ -17,8 +17,8 @@ void get_data(int);
 void differ_values(int);
 void print_array(int);
 void get_value(int,int);
-void interpolation(float p);
-float k(float p, int count);
+void interpolation(float,int);
+//float k(float p, int count);
 
 
 struct array* create_array(int terms)
@@ -165,38 +165,49 @@ void get_value(int num,int ar)
  }
 }
 
-void find_value(int unknown)
+void find_value(float unknown)
 {
  struct array *temp=start;
  float h;
- int i=0;
+ int i=0,index=0;
+ while(temp->arr[i]!=unknown)
+ {
+   printf("\nValue of i = %d",i);
+   i++;
+   printf("\nNOW i = %d", i);
+   printf("\ntemp->arr[%d]=%f", i,temp->arr[i]);
+ }
  printf("\nWe select %.3f as x0",temp->arr[i]);
- h = ((1)  /  (fabs((temp->arr[i])-(temp->arr[i+1]))));
+ h = ((temp->arr[i+1])-(temp->arr[i]));
  temp=temp->next;
  printf(" and %.3f as y0", temp->arr[i]);
- printf("\n\tp = %f", h);
- interpolation(h);
+ printf("\n\th = %f", h);
+ interpolation(h,i);
 }
 
-void interpolation(float h)
+void interpolation(float h,int i)
 {
   struct array *temp=start;
   int count=1;
-  float sum=0.0;
+  float sum=0,temp1;
   temp=temp->next;
   while(temp->next!=NULL)
   {
-   printf("\nCount = ");
    temp=temp->next;
-   printf("t\ntemp->arr[0]: %f", temp->arr[0]);
    if(count%2==0)
-     sum= (sum - ((1/count)*(temp->arr[0])));
+    {
+     temp1=((temp->arr[i])/count);
+     sum = (sum - temp1);
+    }
+
    else
-     sum=sum + ((1/count)*(temp->arr[0])));
-   printf("\nSum=%f", sum);
+   {
+     temp1=((temp->arr[i])/count);
+     sum = (sum + temp1);
+   }
    count++;
   }
-  printf("\nSolution: %f", (h)*sum);
+  printf("\nSolution: %f", ((1/h)*sum));
 }
 
 void main()

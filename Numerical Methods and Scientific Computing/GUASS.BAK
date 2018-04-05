@@ -2,8 +2,10 @@
 #include<conio.h>
 #define SIZE 20
 
-float mat[3][4]={ 10, -7, 3, 5, -6, 8, 4, 7, 2, 6, 9,-1 };
+float mat[3][4]={ 10, -7, 3,-5, -6, 8, 4, -7, 2, 6, 9,1 };
+//float mat[3][4];
 int rows, colms;
+float x[10];
 
 void print_mat();
 
@@ -21,32 +23,22 @@ void initialize_mat()
  print_mat();
 }
 
-/*void create_mat()
-{
- rows=unknown;
- colms=unknown+1;
- mat=(int**)malloc(sizeof(int)*(rows*colms));
- initialize_mat();
-} */
-
 void enter_values()
 {
   int i,j,*k;
-  printf("Enter the equations: ");
-  /*for(i=0;i<rows;i++)
+  printf("Enter the values in the matrix: ");
+  for(i=0;i<rows;i++)
   {
    for(j=0;j<colms;j++)
    {
-    //scanf("%f",&mat[i][j]);
-    //printf("mat[%d][%d]=%0.3f\n", i,j,mat[i][j]);
+    scanf("%f",&mat[i][j]);
    }
-  } */
-//  mat[3][4]={ 1, 4, -1, -5, 1, 1, -6, -12, 3, -1, -1, 4 };
+  }
 }
 
 void print_mat()
 {
- int i,j,k,l=65,count=1;
+ int i,j,k,l=88,count=1;
  for(i=0;i<rows;i++)
  {
    for(j=0;j<colms;j++)
@@ -93,10 +85,38 @@ void operation(int unknown)
   }
 }
 
-back_substitution()
+void back_substitution()
 {
-  float a;
- for()
+  float sub=mat[rows-1][colms-1];
+  int i,j,count=0,k;
+  for(i=rows-1;i>=0;i--)
+  {
+   k=0;
+   for(j=rows-1;j>=i;j--)
+   {
+    if(j==i)
+     {
+      if(count!=0)
+      {
+	sub=mat[i][colms-1]-sub;
+      }
+      x[count]=(sub/mat[i][j]);
+      //printf("\nSub: %.3f/%.3f", sub, mat[i][j]);
+      //printf("\n%.3f", x[count]);
+      count++;
+      sub=0.0;
+     }
+     else
+     {
+      sub= sub + (mat[i][j]*x[k]);
+      k++;
+     }
+   }
+  }
+  for(i=count-1;i>=0;i--)
+  {
+     printf("\n%c = %.3f",(88+i),x[i]);
+  }
 }
 
 void main()
@@ -112,5 +132,6 @@ void main()
  //enter_values();
 // print_mat();
  operation(unknown);
+ back_substitution();
  getch();
 }

@@ -2,7 +2,7 @@
 #include<conio.h>
 #define SIZE 20
 
-float mat[3][4]={ 1, 4, -1, -5, 1, 1, -6, -12, 3, -1, -1, 4 };;
+float mat[3][4]={ 10, -7, 3,-5, -6, 8, 4, -7, 2, 6, 9,1 };
 //float mat[3][4];
 int rows, colms;
 float x[10];
