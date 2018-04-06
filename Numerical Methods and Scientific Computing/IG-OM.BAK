@@ -1,0 +1,210 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+#define si 6
+/*length of sub-interval*/
+
+
+float h,x[10],fx[10],ll,ul;
+
+float func(float);
+void initial(void);
+void trapezoidal(void);
+void simp1(void);
+void simp2(void);
+
+void main()
+{
+ int choice;
+ clrscr();
+ printf("\nEquation initialized is ((1)/(1+(x*x)))");
+ printf("\n\t======MENU=========");
+ printf("\n\t1] TRAPEZIODAL RULE\n\t2] SIMPSON'S 1/3 RULE\n\t3] SIMPSON'S 3/8 RULE");
+ printf("\nEnter your choice: ");
+ scanf("%d", &choice);
+ switch(choice)
+ {
+  case 1:
+	  initial();
+	  trapezoidal();
+	  break;
+  case 2:
+	  initial();
+	  simp1();
+	  break;
+  case 3:
+	  initial();
+	  simp2();
+	  break;
+ }
+ getch();
+}
+
+void simp2()
+{
+ int i=0;
+ float sum1=0,sum2=0,sum3=0,value=0;
+ while(i<si)
+ {
+   if(i==0)
+     sum1=fx[i]+fx[si];
+   else if(i>0 && i<si)
+   {
+     if(i%3==0)
+       sum3=sum3+fx[i];
+     else
+       sum2=sum2+fx[i];
+   }
+   i++;
+ }
+ value=(((3*h)/8)*((sum1)+(3*sum2) + (2*sum3)));
+ printf("\n By using Simpson's 3/8th Rule, we get %.5f.\n", value);
+}
+
+void simp1()
+{
+ int i=0;
+ float sum1=0,sum2=0,sum3=0,value=0;
+ while(i<si)
+ {
+   if(i==0)
+     sum1=fx[i]+fx[si];
+   else if(i>0 && i<si)
+   {
+     if(i%2==0)
+       sum3=sum3+fx[i];
+     else
+       sum2=sum2+fx[i];
+   }
+   i++;
+ }
+ value=((h/3)*((sum1)+(4*sum2) + (2*sum3)));
+ printf("\n By using Simpson's 1/3rd Rule, we get %.5f.\n", value);
+}
+
+
+void trapezoidal()
+{
+ int i=0;
+ float sum1=0,sum2=0,value=0;
+ while(i<si)
+ {
+   if(i==0)
+     sum1=fx[i]+fx[si];
+   else if(i>0 && i<si)
+     sum2=sum2+fx[i];
+   i++;
+ }
+ value=((h/2)*((sum1)+(2*sum2)));
+ printf("\n By using Trapezoidal Rule, we get %.5f.\n", value);
+}
+
+float func(float x)
+{
+  float value;
+  value = ((1)/(1+(x*x)));
+  return value;
+}
+
+void initial()
+{
+ int i;
+ printf("\nEnter the lower and upper limits: ");
+ scanf("%f %f", &ll,&ul);
+ h=((ul-ll)/si);
+ printf("\nCalculated value of h is %.5f", h);
+ x[0]=0;
+ for(i=0;i<=si;i++)
+ {
+  if(i==0)
+    x[i]=ll;
+  else
+    x[i]=x[i-1]+h;
+  fx[i]=func(x[i]);
+ }
+ printf("\n");
+ for(i=0;i<=si;i++)
+ {
+  printf("\n|\tx%d= ", i);
+  printf(" %.5f\t|", x[i]);
+  printf(" f(x%d) = %.5f\t|",i, fx[i]);
+ }
+}
+
+/*
+
+
+Equation initialized is ((1)/(1+(x*x)))
+	======MENU=========
+	1] TRAPEZIODAL RULE
+	2] SIMPSON'S 1/3 RULE
+	3] SIMPSON'S 3/8 RULE
+Enter your choice: 1
+
+Enter the lower and upper limits: 0 6
+
+Calculated value of h is 1.00000
+
+|       x0=  0.00000    | f(x0) = 1.00000       |
+|       x1=  1.00000    | f(x1) = 0.50000       |
+|       x2=  2.00000    | f(x2) = 0.20000       |
+|       x3=  3.00000    | f(x3) = 0.10000       |
+|       x4=  4.00000    | f(x4) = 0.05882       |
+|       x5=  5.00000    | f(x5) = 0.03846       |
+|       x6=  6.00000    | f(x6) = 0.02703       |
+ By using Trapezoidal Rule, we get 1.41080.
+
+
+
+Equation initialized is ((1)/(1+(x*x)))
+	======MENU=========
+	1] TRAPEZIODAL RULE
+	2] SIMPSON'S 1/3 RULE
+	3] SIMPSON'S 3/8 RULE
+Enter your choice: 2
+
+Enter the lower and upper limits: 0 6
+
+Calculated value of h is 1.00000
+
+|       x0=  0.00000    | f(x0) = 1.00000       |
+|       x1=  1.00000    | f(x1) = 0.50000       |
+|       x2=  2.00000    | f(x2) = 0.20000       |
+|       x3=  3.00000    | f(x3) = 0.10000       |
+|       x4=  4.00000    | f(x4) = 0.05882       |
+|       x5=  5.00000    | f(x5) = 0.03846       |
+|       x6=  6.00000    | f(x6) = 0.02703       |
+ By using Simpson's 1/3rd Rule, we get 1.36617.
+
+
+
+Equation initialized is ((1)/(1+(x*x)))                                         
+        ======MENU=========                                                     
+        1] TRAPEZIODAL RULE                                                     
+        2] SIMPSON'S 1/3 RULE                                                   
+        3] SIMPSON'S 3/8 RULE                                                   
+Enter your choice: 3                                                            
+                                                                                
+Enter the lower and upper limits: 0 6                                           
+                                                                                
+Calculated value of h is 1.00000                                                
+                                                                                
+|       x0=  0.00000    | f(x0) = 1.00000       |                               
+|       x1=  1.00000    | f(x1) = 0.50000       |                               
+|       x2=  2.00000    | f(x2) = 0.20000       |                               
+|       x3=  3.00000    | f(x3) = 0.10000       |                               
+|       x4=  4.00000    | f(x4) = 0.05882       |                               
+|       x5=  5.00000    | f(x5) = 0.03846       |                               
+|       x6=  6.00000    | f(x6) = 0.02703       |                               
+ By using Simpson's 3/8th Rule, we get 1.35708.                                 
+                                                                                
+                                                                                
+                                                                                
+				    */
+                                                                                
+
+
+
+
+
+
