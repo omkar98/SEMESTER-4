@@ -1,4 +1,7 @@
-/*AIM: Hybrid Inheritance and Diamond Problem*/
+/*AIM: Hybrid Inheritance and Diamond Problem:Run using Virtual Base Class
+The Diamond problem in the program arises due to copies generated from the hybrid Inheritance. 
+This problem is solved using Virtual Base Class
+*/
 /*Time: Sat 19 May 2018 04:15:23 PM IST */
 #include<iostream>
 using namespace std;

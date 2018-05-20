@@ -1,4 +1,4 @@
-/*AIM: Simple Multiple Inheritance and understanding the Smbiguity Error*/
+/*AIM: Simple Multiple Inheritance and understanding the Ambiguity Error*/
 /*Time: Fri 18 May 2018 05:03:58 PM IST */
 #include<iostream>
 using namespace std;
